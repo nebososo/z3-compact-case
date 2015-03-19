@@ -1,7 +1,7 @@
 $fn = 30;
 
 // set this to some multiple of your nozzle width
-shellWidth = 0.8;
+shellWidth = 2.4;
 wallWidth = shellWidth;
 
 // actual dimensions
@@ -10,9 +10,9 @@ wallWidth = shellWidth;
 //depth = 8.4;
 
 // tweaked larger a bit
-length = 128.6;
-width = 66.3;
-depth = 9;
+length = 127.6;
+width = 65.2;
+depth = 8.4;
 
 // we're trying to make it as big as the phone plus a wall all around
 xscale = (length+2*wallWidth)/length;
@@ -60,6 +60,11 @@ cOffset = 17.5 + wallWidth; // still not 100%
 cLength = 10;
 cWidth = edgeRadius*2+1;
 cHeight = depth*zscale - (lip+wallWidth)*2;
+
+// charger flap
+chLength = 39;
+chWidth = edgeRadius*2+1;
+chHeight = depth*zscale - (lip+wallWidth)*2;
 
 
 // a three dimensional rounded rectangle
@@ -112,10 +117,10 @@ module phone() {
 }
 
 module bottomCutout() {
-  translate([edge+wallWidth, edge+wallWidth, -0.1])
+  translate([wallWidth+3, edge+25, -0.1])
   rounded(
-    l=bottomCutoutLength,
-    w=bottomCutoutWidth,
+    l=15,
+    w=30,
     d=wallWidth+1,
     r=cornerRadius);
 }
@@ -133,14 +138,19 @@ module verticalCutout() {
 }
 
 module powerCutout() {
-  translate([outsideLength/2 - pLength/2, outsideWidth - pWidth/2, wallWidth+lip])
-  cube([pLength, pWidth, pHeight]);
+  translate([outsideLength/2 - pLength/2, outsideWidth - pWidth/2, wallWidth])
+  cube([pLength, pWidth, pHeight+5]);
   //roundedSlab(l=pLength, w=pWidth, d=pHeight, e=edgeRadius);
 }
 
+module chargerCutout() {
+  translate([wallWidth*2+3, 0, wallWidth])
+  cube([chLength, chWidth, pHeight+5]);
+}
+
 module cameraCutout() {
-  translate([outsideLength - (cOffset+cLength), outsideWidth - cWidth/2, wallWidth+lip])
-  cube([cLength, cWidth, cHeight]);
+  translate([outsideLength - (cOffset+cLength), outsideWidth - cWidth/2, wallWidth])
+  cube([cLength, cWidth, cHeight+5]);
 }
 
 module cover() {
@@ -164,6 +174,9 @@ module cover() {
 
     // cut out the power and volume buttons
     powerCutout();
+
+    // cut out the power charger flap
+    chargerCutout();
 
     // cut out the camera button
     cameraCutout();
