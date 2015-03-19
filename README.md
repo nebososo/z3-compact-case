@@ -3,6 +3,8 @@
 A modified version of a 3D printable case for a Sony Xperia Z3 Compact
 smartphone [original on thingiverse](http://www.thingiverse.com/thing:714570).
 
+Take a look at [this case on thingiverse](https://www.thingiverse.com/thing:730636).
+
 - No need to take off the cover to charge anymore (with the regular charger).
 - Protect the back (with a rectangle cut for the camera)
 - Much thicker (for added protection)
